@@ -15,14 +15,14 @@ namespace InterceptorDemo.Interceptors
         {
             var changeTracker = eventData.Context.ChangeTracker;
 
-            var addedList = changeTracker.Entries<IAuditable>().Where(x => x.State == EntityState.Added);
+            var addedList = changeTracker.Entries<IAuditable>().Where(x => x.State == EntityState.Added).ToList();
 
             foreach (var entityEntry in addedList)
             {
                 entityEntry.Property(x => x.CreateDate).CurrentValue = DateTime.Now;
             }
 
-            var modifiedList = changeTracker.Entries<IAuditable>().Where(x => x.State == EntityState.Modified);
+            var modifiedList = changeTracker.Entries<IAuditable>().Where(x => x.State == EntityState.Modified).ToList();
 
             foreach (var entityEntry in modifiedList)
             {

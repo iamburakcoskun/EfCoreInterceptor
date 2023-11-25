@@ -1,17 +1,23 @@
-﻿// See https://aka.ms/new-console-template for more information
-using EfCoreInterceptor.DbContext;
+﻿using EfCoreInterceptor.DbContext;
+using EfCoreInterceptor.Entities;
+using Microsoft.EntityFrameworkCore;
 
 Console.WriteLine("Hello, World!");
 
-MyDbContext dbContext = new MyDbContext();
+MyDbContext dbx = new MyDbContext();
 
-dbContext.Students.AddAsync(new EfCoreInterceptor.Entities.Student()
-{
-    FirstName="Burak",
-    LastName="Coskun"
-});
+//dbx.Students.AddAsync(new Student()
+//{
+//    FirstName="Burak",
+//    LastName="Coskun"
+//});
 
-dbContext.SaveChanges();
+var entity= dbx.Students.FirstOrDefault(x => x.Id == 1);
+
+entity.FirstName = "Fatma";
+entity.LastName = "Coşkun";
+
+dbx.SaveChanges();
 
 Console.WriteLine("Done");
 Console.ReadLine();
